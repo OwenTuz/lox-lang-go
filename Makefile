@@ -1,4 +1,4 @@
-.PHONY:  build clean run test
+.PHONY:  build clean run test gofmt
 
 build:
 	go build -o bin/lox cmd/lox.go
@@ -11,3 +11,6 @@ run:
 
 test:
 	go test $(ARGS) ./... 
+
+gofmt:
+	gofmt -w $(shell find . -type f -name '*.go')

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+[[ -z "${GIT_SKIP_HOOKS}" ]] || exit 0
+
+for FILE in $(git diff --cached --name-only --diff-filter=ACM **/*\.go); do
+ if ! gofmt -d "${FILE}" 2>&1 | read -r; then
+   echo "pre-commit hook: gofmt found errors. Please fix before committing" >&2
+   exit 1
+ fi
+done
